@@ -185,6 +185,13 @@ img { max-width: 100%; display: block; }
   padding: 6px 14px;
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  cursor: default;
+}
+.ae-hero-strip span:hover {
+  border-color: var(--ae-red);
+  color: var(--ae-white);
+  background: rgba(238,53,53,0.12);
 }
 
 .ae-btn {
