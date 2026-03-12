@@ -176,6 +176,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: 3px;
   color: var(--ae-red);
   margin-bottom: 20px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 .ae-hero h1 {
   font-family: var(--ae-font-h);
@@ -191,7 +192,7 @@ img { max-width: 100%; display: block; }
 }
 .ae-hero-content > p {
   font-size: 1.05rem;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255,255,255,0.88);
   max-width: 520px;
   margin-bottom: 28px;
   line-height: 1.8;
@@ -211,9 +212,9 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.78);
   padding: 6px 14px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
   border-radius: 2px;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
   cursor: default;
@@ -656,5 +657,251 @@ img { max-width: 100%; display: block; }
     text-align: center;
     justify-content: center;
     background: #D4A017 !important;
+  }
+}
+
+/* ================================================
+   HERO — PHOTO BACKGROUND VARIANT
+   ================================================ */
+.ae-hero--photo {
+  background: url('images/port-sunset-panoramic.jpg') center/cover no-repeat;
+  position: relative;
+}
+.ae-hero--photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(45,46,142,0.94) 0%, rgba(45,46,142,0.88) 100%);
+  pointer-events: none;
+}
+.ae-hero--photo::after { display: none; }
+.ae-hero--photo .ae-hero-inner {
+  grid-template-columns: 1fr;
+}
+
+/* ================================================
+   HOMEPAGE — OUR WORK SHOWCASE
+   ================================================ */
+.ae-projects {
+  background: var(--ae-white);
+  padding: 88px 0;
+}
+.ae-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+.ae-projects-grid a:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.ae-projects-grid a {
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.ae-projects-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  transition: transform 0.3s ease;
+}
+.ae-projects-grid a:first-child img {
+  aspect-ratio: auto;
+}
+.ae-projects-grid a:hover img {
+  transform: scale(1.04);
+}
+.ae-projects-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ================================================
+   PAGE HERO — INNER PAGES
+   ================================================ */
+.ae-page-hero {
+  background: var(--ae-navy);
+  padding: 56px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ae-page-hero::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(238,53,53,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.ae-page-hero h1 {
+  font-family: var(--ae-font-h);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 900;
+  color: var(--ae-white);
+  position: relative;
+}
+.ae-page-hero p {
+  color: rgba(255,255,255,0.6);
+  font-size: 1rem;
+  margin-top: 12px;
+  position: relative;
+}
+
+/* ================================================
+   PROJECT SECTIONS — PROJECTS PAGE
+   ================================================ */
+.ae-project-section {
+  padding: 72px 0;
+}
+.ae-project-section:nth-child(even) {
+  background: var(--ae-light);
+}
+.ae-project-section h2 {
+  font-family: var(--ae-font-h);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ae-navy);
+  margin-bottom: 12px;
+}
+.ae-project-section h2::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--ae-red);
+  margin-top: 12px;
+}
+.ae-project-section > .ae-container > p {
+  color: var(--ae-grey);
+  font-size: 0.93rem;
+  line-height: 1.8;
+  max-width: 720px;
+  margin-bottom: 36px;
+}
+
+/* ================================================
+   GALLERY GRID
+   ================================================ */
+.ae-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.ae-gallery-grid button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 4px;
+  display: block;
+}
+.ae-gallery-grid img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.ae-gallery-grid button:hover img {
+  transform: scale(1.04);
+}
+
+/* ================================================
+   LIGHTBOX
+   ================================================ */
+.ae-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.ae-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+.ae-lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.ae-lightbox-close,
+.ae-lightbox-prev,
+.ae-lightbox-next {
+  position: absolute;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 12px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.ae-lightbox-close:hover,
+.ae-lightbox-prev:hover,
+.ae-lightbox-next:hover {
+  color: var(--ae-white);
+}
+.ae-lightbox-close {
+  top: 20px;
+  right: 24px;
+  font-size: 2.2rem;
+}
+.ae-lightbox-prev {
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ae-lightbox-next {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ================================================
+   RESPONSIVE — PROJECTS & GALLERY
+   ================================================ */
+@media (max-width: 768px) {
+  .ae-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ae-projects-grid a:first-child {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  .ae-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ae-lightbox-prev,
+  .ae-lightbox-next {
+    display: none;
+  }
+  .ae-project-section { padding: 48px 0; }
+}
+
+@media (max-width: 480px) {
+  .ae-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .ae-projects-grid a:first-child {
+    grid-column: span 1;
+  }
+  .ae-gallery-grid {
+    grid-template-columns: 1fr;
   }
 }
