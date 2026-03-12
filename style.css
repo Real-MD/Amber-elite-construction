@@ -36,19 +36,32 @@ img { max-width: 100%; display: block; }
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  transition: box-shadow 0.3s ease;
+}
+.ae-header.scrolled {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
 }
 .ae-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 75px;
+  transition: height 0.3s ease;
+}
+.ae-header.scrolled .ae-header-inner {
+  height: 60px;
 }
 .ae-logo {
   background: var(--ae-white);
   padding: 7px 14px;
   border-radius: 3px;
+  transition: padding 0.3s ease;
 }
-.ae-logo img { height: 36px; width: auto; display: block; }
+.ae-header.scrolled .ae-logo {
+  padding: 5px 12px;
+}
+.ae-logo img { height: 36px; width: auto; display: block; transition: height 0.3s ease; }
+.ae-header.scrolled .ae-logo img { height: 30px; }
 
 .ae-nav { display: flex; align-self: stretch; }
 .ae-nav ul {
@@ -166,7 +179,7 @@ img { max-width: 100%; display: block; }
   gap: 60px;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .ae-hero-label {
   font-family: var(--ae-font-h);
@@ -677,8 +690,14 @@ img { max-width: 100%; display: block; }
    HERO — PHOTO BACKGROUND VARIANT
    ================================================ */
 .ae-hero--photo {
-  background: url('images/port-sunset-panoramic.jpg') center/cover no-repeat;
   position: relative;
+}
+.ae-hero--photo .ae-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('images/port-sunset-panoramic.jpg') center/cover no-repeat;
+  will-change: transform;
+  z-index: 0;
 }
 .ae-hero--photo::before {
   content: '';
@@ -686,6 +705,7 @@ img { max-width: 100%; display: block; }
   inset: 0;
   background: linear-gradient(to right, rgba(45,46,142,0.94) 0%, rgba(45,46,142,0.88) 100%);
   pointer-events: none;
+  z-index: 1;
 }
 .ae-hero--photo::after { display: none; }
 .ae-hero--photo .ae-hero-inner {

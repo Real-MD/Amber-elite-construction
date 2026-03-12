@@ -21,7 +21,7 @@
     <div class="ae-container ae-header-inner">
 
       <div class="ae-logo">
-        <a href="index.html" aria-label="Amber Elite Construction — Home">
+        <a href="#" aria-label="Amber Elite Construction — Home" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});">
           <img src="amber-text-logo.png" alt="Amber Elite Construction">
         </a>
       </div>
@@ -49,6 +49,7 @@
        HERO
        ================================================ -->
   <section class="ae-hero ae-hero--photo">
+    <div class="ae-hero-bg"></div>
     <div class="ae-container ae-hero-inner">
 
       <div class="ae-hero-content">
@@ -419,6 +420,30 @@
         el.style.transitionDelay = (i * 0.1) + 's';
       });
     });
+
+    /* ---------- Scroll header ---------- */
+    var header = document.getElementById('aeHeader');
+    if (header) {
+      var onScroll = function() {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    /* ---------- Hero parallax ---------- */
+    var heroBg = document.querySelector('.ae-hero-bg');
+    if (heroBg) {
+      var heroSection = document.querySelector('.ae-hero');
+      var onParallax = function() {
+        var scrolled = window.scrollY;
+        var heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        if (scrolled < heroBottom) {
+          heroBg.style.transform = 'translateY(' + (scrolled * 0.35) + 'px)';
+        }
+      };
+      window.addEventListener('scroll', onParallax, { passive: true });
+    }
   </script>
 
   <a href="https://wa.me/447964284614" class="ae-whatsapp-btn" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">

@@ -62,7 +62,7 @@
       <h2>Port Infrastructure</h2>
       <p>Large-scale groundworks, reinforced concrete works and drainage infrastructure at a major UK container port. Works included deep excavation alongside live rail, rebar cage construction, concrete beam walls, formwork, night pours and site clearance.</p>
 
-      <div class="ae-gallery-grid fade-in">
+      <div class="ae-gallery-grid">
         <button type="button" aria-label="View full image — Sunset panoramic of port groundworks">
           <img src="images/thumbs/port-sunset-panoramic.jpg" alt="Sunset panoramic of port groundworks site" loading="lazy" data-full="images/port-sunset-panoramic.jpg">
         </button>
@@ -138,7 +138,7 @@
       <h2>Commercial External Works</h2>
       <p>Block paving, aggregate base preparation and external groundworks for commercial and residential developments.</p>
 
-      <div class="ae-gallery-grid fade-in">
+      <div class="ae-gallery-grid">
         <button type="button" aria-label="View full image — Commercial aggregate base preparation">
           <img src="images/thumbs/commercial-aggregate-base.jpg" alt="Aggregate base preparation for commercial site" loading="lazy" data-full="images/commercial-aggregate-base.jpg">
         </button>
@@ -163,7 +163,7 @@
       <h2>Industrial &amp; Demolition</h2>
       <p>Indoor demolition, safety floor marking and flooring works within industrial and commercial buildings.</p>
 
-      <div class="ae-gallery-grid fade-in">
+      <div class="ae-gallery-grid">
         <button type="button" aria-label="View full image — Indoor demolition works">
           <img src="images/thumbs/indoor-demolition-01.jpg" alt="Indoor demolition works in commercial building" loading="lazy" data-full="images/indoor-demolition-01.jpg">
         </button>
@@ -321,6 +321,34 @@
       fadeEls.forEach(function(el) { fadeObserver.observe(el); });
     } else {
       fadeEls.forEach(function(el) { el.classList.add('visible'); });
+    }
+
+    /* ---------- Stagger gallery images ---------- */
+    var galleryObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          galleryObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    document.querySelectorAll('.ae-gallery-grid').forEach(function(grid) {
+      grid.querySelectorAll('button').forEach(function(btn, i) {
+        btn.classList.add('fade-in');
+        btn.style.transitionDelay = (i * 0.08) + 's';
+        galleryObserver.observe(btn);
+      });
+    });
+
+    /* ---------- Scroll header ---------- */
+    var header = document.getElementById('aeHeader');
+    if (header) {
+      var onScroll = function() {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     }
   </script>
 
